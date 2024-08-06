@@ -273,6 +273,25 @@ RegisterNetEvent('qbx_jewelery:client:syncconfig', function(vitrines)
 end)
 
 RegisterNetEvent('qbx_jewelery:client:alarm', function()
+    local data = exports['cd_dispatch']:GetPlayerInfo()
+    TriggerServerEvent('cd_dispatch:AddNotification', {
+        job_table = { 'police', 'sheriff', 'state' }, 
+        coords = data.coords,
+        title = '10-90 - Vangelico Robbery',
+        message = 'An alarm has been triggered at Vangelico on '..data.street, 
+        flash = 0,
+        unique_id = data.unique_id,
+        sound = 1,
+        blip = {
+            sprite = 434, 
+            scale = 1.5, 
+            colour = 5,
+            flashes = false, 
+            text = '10-90 | Vangelico Robbery',
+            time = 5,
+            radius = 0,
+        }
+    })
     PrepareAlarm('JEWEL_STORE_HEIST_ALARMS')
     Wait(100)
     StartAlarm('JEWEL_STORE_HEIST_ALARMS', false)
